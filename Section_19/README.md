@@ -1,1 +1,1 @@
-Section 19: The Composition API - Replacing the Options API
+## Section 19: The Composition API - Replacing the Options API

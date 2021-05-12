@@ -1,1 +1,1 @@
-Section 17: Vue & Authentication
+## Section 17: Vue & Authentication

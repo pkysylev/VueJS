@@ -1,1 +1,1 @@
-Section 8: Component Communication
+## Section 8: Component Communication

@@ -1,1 +1,1 @@
-Section 18: Optimizing & Deploying Vue Apps
+## Section 18: Optimizing & Deploying Vue Apps

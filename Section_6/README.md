@@ -1,1 +1,1 @@
-Section 6: Introducing Components
+## Section 6: Introducing Components

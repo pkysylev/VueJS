@@ -1,1 +1,1 @@
-Section 5: Vue: Behind the Scenes
+## Section 5: Vue: Behind the Scenes

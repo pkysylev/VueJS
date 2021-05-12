@@ -1,1 +1,1 @@
-Section 3: Rendering Conditional Content & Lists
+## Section 3: Rendering Conditional Content & Lists
