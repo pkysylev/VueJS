@@ -91,8 +91,9 @@
           v-model="how"
         />
         <label for="how-other">Other</label>
-      </div>
-      <div class="form-control">
+      </div>      
+    </div>
+    <div class="form-control">
         <input
           type="checkbox"
           id="confirm-terms"
@@ -101,7 +102,6 @@
         />
         <label for="confirm-terms">Agree to terms of use?</label>
       </div>
-    </div>
     <div>
       <button>Save Data</button>
     </div>
