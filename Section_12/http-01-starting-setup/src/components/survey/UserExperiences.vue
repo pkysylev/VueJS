@@ -49,11 +49,14 @@ export default {
               name: data[id].userName,
               rating: data[id].rating,
             });
-            
+
             this.results = results;
           }
         });
     },
+  },
+  mounted() {
+    this.loadExpiriences();
   },
 };
 </script>
