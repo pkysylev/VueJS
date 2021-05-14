@@ -18,6 +18,7 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
+  props: ['teamId'],
   components: {
     UserItem,
   },
@@ -28,9 +29,7 @@ export default {
     };
   },
   methods: {
-    loadTeamMembers(route) {
-      //this.$route.path; // /teams/t1
-      const teamId = route.params.teamId;
+    loadTeamMembers(teamId) {            
       const selectedTeam = this.teams.find((team) => team.id === teamId);
 
       // I have same problem. When I go to teams member view and then go to other route that is not teams member view, for example to users list, it throws error:
@@ -51,11 +50,12 @@ export default {
     },
   },
   created() {
-    this.loadTeamMembers(this.$route);
+    //this.$route.path; // /teams/t1
+    this.loadTeamMembers(this.teamId);
   },
   watch: {
-    $route(newRoute) {
-      this.loadTeamMembers(newRoute);
+    teamId(newId) {
+      this.loadTeamMembers(newId);
     },
   },
 };
