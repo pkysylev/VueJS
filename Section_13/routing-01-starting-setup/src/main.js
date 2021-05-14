@@ -15,8 +15,8 @@ const router = createRouter({
         { path: '/', redirect: '/teams' },
         {
             name: 'teams',
-            path: '/teams', 
-            components: { 
+            path: '/teams',
+            components: {
                 default: TeamsList,
                 footer: TeamsFooter
             },
@@ -30,17 +30,27 @@ const router = createRouter({
             ]
         },
         // { path: '/teams', component: TeamsList, alias: '/' },
-        { 
-            path: '/users', 
+        {
+            path: '/users',
             components: {
-                default: UsersList ,
+                default: UsersList,
                 footer: UsersFooter
             }
         },
         // { path: '/:notFound(.*)', redirect: '/teams' }
         { path: '/:notFound(.*)', component: NotFound }
     ],
-    linkActiveClass: 'active'
+    linkActiveClass: 'active',
+    scrollBehavior(to, from, savedPosition) {
+        console.log(to, from, savedPosition);
+        if(savedPosition){
+            return savedPosition;
+        }
+        return {
+            left: 0,
+            top: 0
+        };
+    }
 });
 
 const app = createApp(App)
