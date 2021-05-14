@@ -9,6 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <router-link to="/teams/t2">Go to Team 2</router-link>
   </section>
 </template>
 
@@ -26,18 +27,36 @@ export default {
       members: [],
     };
   },
+  methods: {
+    loadTeamMembers(route) {
+      //this.$route.path; // /teams/t1
+      const teamId = route.params.teamId;
+      const selectedTeam = this.teams.find((team) => team.id === teamId);
+
+      // I have same problem. When I go to teams member view and then go to other route that is not teams member view, for example to users list, it throws error:
+      // Uncaught (in promise) TypeError: Cannot read property 'members' of undefined
+      // It is because TeamMembers.vue watcher detects $route change. 
+      // When it goes to other path there is no teamId parameter in that new route so it can not find any team because teamId parameter get undefined value. 
+      // I solved it checking if any team was selected:
+      if (!selectedTeam) return;
+
+      const members = selectedTeam.members;
+      const selectedMembers = [];
+      for (const member of members) {
+        const selectedUser = this.users.find((user) => user.id === member);
+        selectedMembers.push(selectedUser);
+      }
+      this.members = selectedMembers;
+      this.teamName = selectedTeam.name;
+    },
+  },
   created() {
-    //this.$route.path; // /teams/t1
-    const teamId = this.$route.params.teamId;
-    const selectedTeam = this.teams.find((team) => team.id === teamId);
-    const members = selectedTeam.members;
-    const selectedMembers = [];
-    for (const member of members) {
-      const selectedUser = this.users.find((user) => user.id === member);
-      selectedMembers.push(selectedUser);
-    }
-    this.members = selectedMembers;
-    this.teamName = selectedTeam.name;
+    this.loadTeamMembers(this.$route);
+  },
+  watch: {
+    $route(newRoute) {
+      this.loadTeamMembers(newRoute);
+    },
   },
 };
 </script>
