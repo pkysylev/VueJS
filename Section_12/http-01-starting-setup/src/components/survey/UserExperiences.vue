@@ -47,10 +47,10 @@ export default {
         .get(
           'https://vue-http-demo-867eb-default-rtdb.firebaseio.com/surveys.json'
         )
-        .then((response) => {
+        .then(response => {
           return response.data;
         })
-        .then((data) => {
+        .then(data => {
           this.isLoading = false;
           const results = [];
           for (const id in data) {
@@ -63,7 +63,7 @@ export default {
             this.results = results;
           }
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
           this.isLoading = false;
           this.error = 'Failed to fetch the data - please try again later.';
