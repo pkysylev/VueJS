@@ -1,4 +1,9 @@
 <template>
+<div class="container">
+  <users-list>
+    
+  </users-list>
+</div>
   <div class="container">
     <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="aninateBlock">Animate</button>
@@ -10,7 +15,7 @@
       enter-active-class="some-enter-active-class"
     > -->
     <transition
-      :css="false"      
+      :css="false"
       @before-enter="paraBeforeEnter"
       @before-leave="paraBeforeLeave"
       @enter="paraEnter"
@@ -42,7 +47,12 @@
 </template>  
 
 <script>
+import UsersList from './components/UsersList.vue';
+
 export default {
+  components: {
+    UsersList,
+  },
   data() {
     return {
       animatedBlock: false,
