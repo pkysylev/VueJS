@@ -9,7 +9,14 @@
       enter-to-class="some-enter-to-class"
       enter-active-class="some-enter-active-class"
     > -->
-    <transition name="para">
+    <transition name="para" 
+    @before-enter="paraBeforeEnter"
+    @before-leave="paraBeforeLeave"
+    @enter="paraEnter"
+    @afterEnter="paraAfterEnter"
+    @leave="paraLeave"
+    @afterLeave="paraAfterLeave"
+    >
       <!-- Defining custom prefix -->
       <p v-if="paraIsVisible">This is only sometimes visible...</p>
     </transition>
@@ -60,6 +67,30 @@ export default {
     hideUsers() {
       this.usersAreVisible = false;
     },
+    paraBeforeEnter(el) {
+      console.log('beforeEnter');
+      console.log(el);
+    },
+    paraBeforeLeave(el){
+      console.log('beforeLeave');
+      console.log(el);
+    },
+    paraEnter(el){
+      console.log('enter');
+      console.log(el);
+    },
+    paraAfterEnter(el){
+      console.log('afterEnter');
+      console.log(el);
+    },
+    paraLeave(el){
+      console.log('leave');
+      console.log(el);
+    },
+    paraAfterLeave(el){
+      console.log('afterLeave');
+      console.log(el);
+    }
   },
 };
 </script>
@@ -119,7 +150,7 @@ button:active {
 
 .para-enter-active {
   /* transition: all 1s ease-out; */
-  animation: slide-fade 1s ease-out;
+  animation: slide-fade 2s ease-out;
 }
 
 .para-enter-to {
