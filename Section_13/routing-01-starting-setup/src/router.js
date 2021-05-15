@@ -15,6 +15,7 @@ const router = createRouter({
         {
             name: 'teams',
             path: '/teams',
+            meta: { needsAuth: true },
             components: {
                 default: TeamsList,
                 footer: TeamsFooter
@@ -60,7 +61,13 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     console.log('Global beforeEach');
     console.log(to, from);
-    next();
+    if (to.meta.needsAuth) {
+        console.log('Needs auth!');
+        var userHasAPermission = confirm(`This page requires a special persmission to visit 🞱${to.name}🞱 page. \r\n Do you have it?`);
+        next(userHasAPermission);
+    } else {
+        next();
+    }
     //next('/users');
 
     // if (to.name === 'team-members') {
