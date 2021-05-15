@@ -9,13 +9,16 @@
       enter-to-class="some-enter-to-class"
       enter-active-class="some-enter-active-class"
     > -->
-    <transition name="para" 
-    @before-enter="paraBeforeEnter"
-    @before-leave="paraBeforeLeave"
-    @enter="paraEnter"
-    @afterEnter="paraAfterEnter"
-    @leave="paraLeave"
-    @afterLeave="paraAfterLeave"
+    <transition
+      name="para"
+      @before-enter="paraBeforeEnter"
+      @before-leave="paraBeforeLeave"
+      @enter="paraEnter"
+      @afterEnter="paraAfterEnter"
+      @leave="paraLeave"
+      @afterLeave="paraAfterLeave"
+      @enter-cancelled="paraEnterCancelled"
+      @leave-cancelled="paraLeaveCancelled"
     >
       <!-- Defining custom prefix -->
       <p v-if="paraIsVisible">This is only sometimes visible...</p>
@@ -46,6 +49,8 @@ export default {
       dialogIsVisible: false,
       paraIsVisible: false,
       usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null,
     };
   },
   methods: {
@@ -70,27 +75,62 @@ export default {
     paraBeforeEnter(el) {
       console.log('beforeEnter');
       console.log(el);
+
+      el.style.opacity = 0;
     },
-    paraBeforeLeave(el){
+    paraBeforeLeave(el) {
       console.log('beforeLeave');
       console.log(el);
+
+      el.style.opacity = 1;
     },
-    paraEnter(el){
+    paraEnter(el, done) {
       console.log('enter');
       console.log(el);
+
+      let round = 1;
+      this.enterInterval = setInterval(() => {
+        el.style.opacity = round * 0.01;
+        round++;
+        if (round > 100) {
+          clearInterval(this.enterInterval);
+          done();
+        }
+      }, 20);
     },
-    paraAfterEnter(el){
+    paraAfterEnter(el) {
       console.log('afterEnter');
       console.log(el);
     },
-    paraLeave(el){
+    paraLeave(el, done) {
       console.log('leave');
       console.log(el);
+
+      let round = 1;
+      this.leaveInterval = setInterval(() => {
+        el.style.opacity = 1 - round * 0.01;
+        round++;
+        if (round > 100) {
+          clearInterval(this.leaveInterval);
+          done();
+        }
+      }, 20);
     },
-    paraAfterLeave(el){
+    paraAfterLeave(el) {
       console.log('afterLeave');
       console.log(el);
-    }
+    },
+    paraEnterCancelled(el) {
+      console.log('paraEnterCancelled');
+      console.log(el);
+
+      clearInterval(this.enterInterval);
+    },
+    paraLeaveCancelled(el) {
+      console.log('paraLeaveCancelled');
+      console.log(el);
+      clearInterval(this.leaveInterval);
+    },
   },
 };
 </script>
@@ -124,7 +164,6 @@ button:active {
   height: 8rem;
   background-color: #290033;
   margin-bottom: 2rem;
-  /* transition: transform 0.5s ease-out; */
 }
 .container {
   max-width: 40rem;
@@ -139,38 +178,7 @@ button:active {
 }
 
 .animate {
-  /* transform: translateX(-150px); */
   animation: slide-fade 1s ease-out forwards;
-}
-
-.para-enter-from {
-  /* opacity: 0;
-  transform: translateY(-30px); */
-}
-
-.para-enter-active {
-  /* transition: all 1s ease-out; */
-  animation: slide-fade 2s ease-out;
-}
-
-.para-enter-to {
-  /* opacity: 1;
-  transform: translateY(0); */
-}
-
-.para-leave-from {
-  /* opacity: 1;
-  transform: translateY(0); */
-}
-
-.para-leave-active {
-  /* transition: all 1s ease-in; */
-  animation: slide-fade 1s ease-in;
-}
-
-.para-leave-to {
-  /* opacity: 0;
-  transform: translateY(-30px); */
 }
 
 .fade-button-enter-from,
