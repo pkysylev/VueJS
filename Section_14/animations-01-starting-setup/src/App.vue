@@ -10,7 +10,7 @@
       enter-active-class="some-enter-active-class"
     > -->
     <transition
-      name="para"
+      :css="false"      
       @before-enter="paraBeforeEnter"
       @before-leave="paraBeforeLeave"
       @enter="paraEnter"
