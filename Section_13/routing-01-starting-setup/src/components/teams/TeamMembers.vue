@@ -54,6 +54,12 @@ export default {
     this.loadTeamMembers(this.teamId);
     //console.log(this.$route.query);
   },
+  // // Would be an alternative to watching the teamId property
+  // // but of course we bind this component to be used with routing
+  // beforeRouteUpdate(to, from, next){
+  //   this.loadTeamMembers(to.params.teamId)
+  //   next();
+  // },
   watch: {
     teamId(newId) {
       this.loadTeamMembers(newId);

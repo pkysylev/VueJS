@@ -12,6 +12,7 @@ export default {
   components: {
     UserItem,
   },
+  inject: ['users'],
   methods: {
     confirmInput(){
       // do something
@@ -19,7 +20,11 @@ export default {
       //this.$router.forward() - read an official documentation
     }
   },
-  inject: ['users'],
+  // beforeRouteEnter(to, from, next){
+  //   console.log('UsersList Component beforeRouteEnter');
+  //   console.log(to, from);
+  //   next();
+  // }
 };
 </script>
 
