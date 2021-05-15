@@ -72,4 +72,13 @@ router.beforeEach((to, from, next) => {
     //next(false);
 });
 
+// afterEach will only run once a navigation has been confirmed
+// In here you can't change that anymore, you can't deny a navigation (in comparison with beforeEach) 
+// You can only do as in the before hooks\guards
+router.afterEach((to, from) => {
+    // Could be helpful to sending analytics data
+    console.log('Global afterEach');
+    console.log(to, from);
+});
+
 export default router;
