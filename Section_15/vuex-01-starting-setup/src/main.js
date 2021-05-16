@@ -4,7 +4,7 @@ import { createStore } from 'vuex'
 import App from './App.vue';
 
 const store = createStore({
-    state(){
+    state() {
         return {
             counter: 0
         };
