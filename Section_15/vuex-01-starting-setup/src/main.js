@@ -6,7 +6,8 @@ import App from './App.vue';
 const store = createStore({
     state() {
         return {
-            counter: 0
+            counter: 0,
+            isUserLoggedIn: false
         };
     },
     mutations: {
@@ -20,21 +21,30 @@ const store = createStore({
         increase(state, payload) {
             //state.counter += payload;
             state.counter += payload.value;
-        }
+        },
+        setAuth(state, payload) {
+            state.isUserLoggedIn = payload.isAuth;
+        }        
     },
     actions: {
         // 1. It is allowed to have the same name actions and mutations        
-        increment(context) {            
+        increment(context) {
             // Actions unlike mutations are allowed to run async code
             setTimeout(() => {
                 context.commit('increment');
             }, 2000);
         },
-        increase(context, payload){
+        increase(context, payload) {
             // Actions unlike mutations are allowed to run async code
             setTimeout(() => {
                 context.commit('increase', payload);
             }, 2000);
+        },
+        login(context) {
+            context.commit('setAuth', { isAuth: true });
+        },
+        logout(context) {
+            context.commit('setAuth', { isAuth: false });
         }
     },
     getters: {
@@ -51,6 +61,9 @@ const store = createStore({
                 return 100;
             }
             return finalCounter;
+        },
+        userIsAuthenticated(state){
+            return state.isUserLoggedIn;
         }
     }
 });
