@@ -13,7 +13,7 @@ export default {
     // }
 
     //...mapActions(['increment', 'increase'])
-    ...mapActions({
+    ...mapActions('numbers', {
       increment: 'increment',
       increase: 'increase',
     }),

@@ -8,16 +8,16 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
     methods: {
-        ...mapActions(['login', 'logout']),        
+        ...mapActions('auth', ['login', 'logout']),        
         login(){
-            this.$store.dispatch('login');
+            this.$store.dispatch('auth/login');
         },
         logout(){
-            this.$store.dispatch('logout');
+            this.$store.dispatch('auth/logout');
         }
     },
     computed: {
-        ...mapGetters(['userIsAuthenticated']),
+        ...mapGetters('auth', ['userIsAuthenticated']),
     }
 };
 </script>

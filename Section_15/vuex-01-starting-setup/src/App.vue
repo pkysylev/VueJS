@@ -40,13 +40,13 @@ export default {
       // this.$store.dispatch('increase', 10);
       // this.$store.dispatch('increase', {value: 10});
       this.$store.dispatch({
-        type: 'increase', // the method name from the vuex actions
+        type: 'numbers/increase', // the method name from the vuex actions
         value: 10,
       });
     },    
   },
   computed: {
-      ...mapGetters(['userIsAuthenticated']),
+      ...mapGetters('auth', ['userIsAuthenticated']),
     }
 };
 </script>
