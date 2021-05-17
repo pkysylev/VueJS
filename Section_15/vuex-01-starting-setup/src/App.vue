@@ -22,10 +22,19 @@ export default {
   },
   methods: {
     increase() {
+      // MUTATIONS
       // this.$store.commit('increase', 10);
       // this.$store.commit('increase', {value: 10});
-      this.$store.commit({
-        type: 'increase',
+      // this.$store.commit({
+      //   type: 'increase',
+      //   value: 10,
+      // });
+      
+      // ACTIONS
+      // this.$store.dispatch('increase', 10);
+      // this.$store.dispatch('increase', {value: 10});
+      this.$store.dispatch({
+        type: 'increase', // the method name from the vuex actions
         value: 10,
       });
     },
