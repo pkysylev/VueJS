@@ -8,7 +8,7 @@
         <h2>Requests Received</h2>
       </header>
       <base-spinner v-if="isLoading"></base-spinner>
-      <ul v-else-if="hasRequests">
+      <ul v-else-if="hasRequests && !isLoading">
         <request-item
           v-for="req in receivedRequests"
           :key="req.id"
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      isLoadin: false,
+      isLoading: false,
       error: null,
     };
   },
